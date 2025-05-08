@@ -1,0 +1,73 @@
+[gd_scene load_steps=9 format=3 uid="uid://s0pn7ecryck1"]
+
+[ext_resource type="Shader" path="res://Assets/Shaders/Backgrounds/StarsBackground.gdshader" id="1_5n02n"]
+[ext_resource type="Shader" path="res://Assets/Shaders/Backgrounds/NebulaBackground.gdshader" id="2_wr4fl"]
+[ext_resource type="Shader" path="res://Assets/Shaders/Backgrounds/Pixelator.gdshader" id="3_c01fj"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_5ybix"]
+noise_type = 3
+frequency = 0.0491
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_rk5ya"]
+noise = SubResource("FastNoiseLite_5ybix")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wo23h"]
+shader = ExtResource("2_wr4fl")
+shader_parameter/stars_on = true
+shader_parameter/timeScaleFactor = 0.04
+shader_parameter/colour_muiltiplier = Color(0, 0.4, 0.647059, 1)
+shader_parameter/colour_muiltiplier2 = Color(0.470588, 0.4, 0.647059, 1)
+shader_parameter/brightness = 1.0
+shader_parameter/clouds_resolution = 3.0
+shader_parameter/clouds_intesity = 0.0
+shader_parameter/waveyness = 0.5
+shader_parameter/fragmentation = 7.0
+shader_parameter/distortion = 0.5
+shader_parameter/clouds_alpha = 0.6
+shader_parameter/movement = 1.0
+shader_parameter/blur = 1.4
+shader_parameter/blur2 = 0.01
+shader_parameter/noise_texture = SubResource("NoiseTexture2D_rk5ya")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0cnjc"]
+shader = ExtResource("1_5n02n")
+shader_parameter/bg_color = Color(0, 0, 0, 0)
+shader_parameter/offset = null
+shader_parameter/bigStarSlow = 2.0
+shader_parameter/mediumStarSlow = 6.0
+shader_parameter/smallStarSlow = 8.0
+shader_parameter/smallStarAmount = 0.002
+shader_parameter/mediumStarAmount = 0.01
+shader_parameter/bigStarAmount = 0.02
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_l52um"]
+shader = ExtResource("3_c01fj")
+shader_parameter/resX = 264
+shader_parameter/resY = 264
+shader_parameter/rgb255 = Vector3(0.001, 0.001, 0.001)
+
+[node name="BackgroundCanvasLayer" type="CanvasLayer"]
+
+[node name="NebulaColorRect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_wo23h")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="StarsColorRect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_0cnjc")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PixelationColorRect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_l52um")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
