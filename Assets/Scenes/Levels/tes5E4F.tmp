@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://3s5248yc2xj0"]
+
+[ext_resource type="PackedScene" uid="uid://s0pn7ecryck1" path="res://Assets/Scenes/Backgrounds/SpaceBackground.tscn" id="1_ae6xs"]
+
+[sub_resource type="Environment" id="Environment_pul7b"]
+background_mode = 3
+ambient_light_source = 1
+glow_enabled = true
+
+[node name="TestLevel" type="Node2D"]
+
+[node name="BackgroundCanvasLayer" parent="." instance=ExtResource("1_ae6xs")]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="CanvasLayer"]
+environment = SubResource("Environment_pul7b")

@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://c6op02mwapnbh"]
+
+[sub_resource type="Curve" id="Curve_vdb7r"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_uldgw"]
+offsets = PackedFloat32Array(0, 0.173333, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1)
+
+[node name="Particles" type="CPUParticles2D"]
+local_coords = true
+direction = Vector2(0, 0)
+spread = 0.0
+gravity = Vector2(0, 0)
+scale_amount_max = 4.0
+scale_amount_curve = SubResource("Curve_vdb7r")
+color_ramp = SubResource("Gradient_uldgw")

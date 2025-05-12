@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://bbyuse885lh46"]
+
+[ext_resource type="Script" path="res://Assets/Scripts/UI/camera_2d.gd" id="1_hosm2"]
+
+[node name="Camera2D" type="Camera2D"]
+process_callback = 0
+script = ExtResource("1_hosm2")

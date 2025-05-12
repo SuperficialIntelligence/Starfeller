@@ -1,0 +1,130 @@
+[gd_scene load_steps=15 format=3 uid="uid://c05ydg4ec5wly"]
+
+[ext_resource type="Script" path="res://Assets/Scripts/Entities/Characters/nonPlayer.gd" id="1_mrg6w"]
+[ext_resource type="Texture2D" uid="uid://c34ci0q7yin71" path="res://Assets/Sprites/Spritesheets/MainSpritesheet.png" id="2_oltdb"]
+[ext_resource type="PackedScene" uid="uid://uxxm34piowex" path="res://Assets/Scenes/Entities/Rings/HollowTriangle.tscn" id="3_mkg75"]
+[ext_resource type="PackedScene" uid="uid://jeysi25fvt0b" path="res://Assets/Scenes/Entities/Rings/Triangle.tscn" id="4_nmmh2"]
+
+[sub_resource type="Curve" id="Curve_tcpcs"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_obkw3"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ibgxt"]
+atlas = ExtResource("2_oltdb")
+region = Rect2(212, 20, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pylgh"]
+atlas = ExtResource("2_oltdb")
+region = Rect2(22, 22, 20, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1uqiu"]
+atlas = ExtResource("2_oltdb")
+region = Rect2(280, 92, 16, 7)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_0nqhw"]
+radius = 11.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_lh440"]
+radius = 40504.8
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_84mtd"]
+radius = 10.198
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_embbe"]
+bg_color = Color(0.579254, 1.97336e-06, 3.85046e-07, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_86a8q"]
+bg_color = Color(0.400884, 0.964544, 0, 1)
+
+[node name="Entity" type="CharacterBody2D" groups=["Enemy"]]
+script = ExtResource("1_mrg6w")
+
+[node name="TrailParticles" type="CPUParticles2D" parent="."]
+amount = 50
+speed_scale = 0.3
+emission_shape = 2
+emission_sphere_radius = 5.9
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 42.45
+initial_velocity_max = 42.45
+linear_accel_max = 100.0
+scale_amount_max = 2.0
+scale_amount_curve = SubResource("Curve_tcpcs")
+color_ramp = SubResource("Gradient_obkw3")
+
+[node name="Particles" type="CPUParticles2D" parent="."]
+amount = 50
+speed_scale = 0.3
+local_coords = true
+emission_shape = 2
+emission_sphere_radius = 8.49
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 42.45
+initial_velocity_max = 42.45
+orbit_velocity_min = 1.0
+orbit_velocity_max = 1.0
+linear_accel_max = 48.48
+scale_amount_max = 2.0
+scale_amount_curve = SubResource("Curve_tcpcs")
+color_ramp = SubResource("Gradient_obkw3")
+
+[node name="BodyCenter" type="Marker2D" parent="."]
+
+[node name="Outline" type="Sprite2D" parent="BodyCenter"]
+position = Vector2(-0.0499999, 0.0499989)
+scale = Vector2(1.00417, 1.00417)
+texture = SubResource("AtlasTexture_ibgxt")
+
+[node name="Body" type="Sprite2D" parent="BodyCenter"]
+self_modulate = Color(0.988235, 0, 0, 0.682353)
+texture = SubResource("AtlasTexture_pylgh")
+
+[node name="EyesPivot" type="Marker2D" parent="BodyCenter"]
+
+[node name="Eyes" type="Sprite2D" parent="BodyCenter/EyesPivot"]
+texture = SubResource("AtlasTexture_1uqiu")
+
+[node name="CollisionBox" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_0nqhw")
+
+[node name="Equips" type="Marker2D" parent="."]
+
+[node name="Rings" type="Marker2D" parent="."]
+
+[node name="RingPivot" parent="Rings" instance=ExtResource("3_mkg75")]
+
+[node name="RingPivot2" parent="Rings" instance=ExtResource("4_nmmh2")]
+rotation = 0.785398
+
+[node name="DetectionArea" type="Area2D" parent="." groups=["Enemy"]]
+collision_layer = 0
+collision_mask = 3
+
+[node name="DetectionBox" type="CollisionShape2D" parent="DetectionArea"]
+shape = SubResource("CircleShape2D_lh440")
+
+[node name="HurtBoxArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="HurtBox" type="CollisionShape2D" parent="HurtBoxArea"]
+shape = SubResource("CircleShape2D_84mtd")
+
+[node name="HealthBar" type="ProgressBar" parent="."]
+offset_left = -15.0
+offset_top = 23.0
+offset_right = 14.0
+offset_bottom = 27.0
+theme_override_styles/background = SubResource("StyleBoxFlat_embbe")
+theme_override_styles/fill = SubResource("StyleBoxFlat_86a8q")
+value = 50.0
+show_percentage = false
+
+[connection signal="body_entered" from="DetectionArea" to="." method="_on_detection_area_body_entered"]
+[connection signal="body_exited" from="DetectionArea" to="." method="_on_detection_area_body_exited"]
+[connection signal="body_entered" from="HurtBoxArea" to="." method="_on_hurt_box_area_body_entered"]

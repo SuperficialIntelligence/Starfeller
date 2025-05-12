@@ -1,0 +1,101 @@
+[gd_scene load_steps=8 format=3 uid="uid://dbxelgjxymsmk"]
+
+[ext_resource type="Script" path="res://Assets/Scripts/Entities/Weapons/weapon.gd" id="1_xwtwy"]
+[ext_resource type="Texture2D" uid="uid://c34ci0q7yin71" path="res://Assets/Sprites/Spritesheets/MainSpritesheet.png" id="2_mdj3a"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f2r2d"]
+atlas = ExtResource("2_mdj3a")
+region = Rect2(81, 199, 15, 18)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jrfdm"]
+atlas = ExtResource("2_mdj3a")
+region = Rect2(29, 199, 18, 18)
+
+[sub_resource type="Animation" id="Animation_wmlo8"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("WeaponPivot/Weapon/BarrelPivot/Barrel:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(5, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("WeaponPivot/Weapon:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(15, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_kmi81"]
+resource_name = "use"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("WeaponPivot/Weapon/BarrelPivot/Barrel:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.1, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-5, 0), Vector2(5, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("WeaponPivot/Weapon:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.1, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(12, 0), Vector2(15, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_j326d"]
+_data = {
+"RESET": SubResource("Animation_wmlo8"),
+"use": SubResource("Animation_kmi81")
+}
+
+[node name="Weapon" type="Node2D"]
+z_index = -2
+script = ExtResource("1_xwtwy")
+type = "StellarEngine"
+
+[node name="WeaponPivot" type="Marker2D" parent="."]
+
+[node name="Weapon" type="Marker2D" parent="WeaponPivot"]
+position = Vector2(15, 0)
+
+[node name="WeaponOutline" type="Sprite2D" parent="WeaponPivot/Weapon"]
+position = Vector2(2.5, 0)
+texture = SubResource("AtlasTexture_f2r2d")
+
+[node name="WeaponSprite" type="Sprite2D" parent="WeaponPivot/Weapon"]
+self_modulate = Color(1, 0.862745, 0.435294, 1)
+texture = SubResource("AtlasTexture_jrfdm")
+
+[node name="BarrelPivot" type="Marker2D" parent="WeaponPivot/Weapon"]
+position = Vector2(10, 0)
+
+[node name="Barrel" type="Marker2D" parent="WeaponPivot/Weapon/BarrelPivot"]
+position = Vector2(5, 0)
+
+[node name="UseAnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_j326d")
+}

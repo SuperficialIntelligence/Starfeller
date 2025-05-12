@@ -1,12 +1,33 @@
-[gd_scene load_steps=3 format=3 uid="uid://dcy31mx0gj471"]
+[gd_scene load_steps=7 format=3 uid="uid://3s5248yc2xj0"]
 
-[ext_resource type="PackedScene" uid="uid://s0pn7ecryck1" path="res://Assets/Scenes/SpaceBackground.tscn" id="1_4n315"]
+[ext_resource type="PackedScene" uid="uid://s0pn7ecryck1" path="res://Assets/Scenes/Backgrounds/SpaceBackground.tscn" id="1_ae6xs"]
+[ext_resource type="PackedScene" uid="uid://d4c07dfhde07" path="res://Assets/Scenes/Entities/Player/player.tscn" id="2_xsvjw"]
+[ext_resource type="PackedScene" uid="uid://bbyuse885lh46" path="res://Assets/Scenes/UI/camera_2d.tscn" id="3_gvi7n"]
+[ext_resource type="PackedScene" uid="uid://c05ydg4ec5wly" path="res://Assets/Scenes/Entities/Stars/enemybasic.tscn" id="4_ipof0"]
+[ext_resource type="PackedScene" uid="uid://bufda618anvye" path="res://Assets/Scenes/UI/game_ui.tscn" id="5_uxjwa"]
 
-[sub_resource type="Environment" id="Environment_dcm5e"]
+[sub_resource type="Environment" id="Environment_pul7b"]
+background_mode = 3
+background_color = Color(1, 1, 1, 1)
+background_canvas_max_layer = 10
+glow_enabled = true
+glow_bloom = 1.0
 
-[node name="Test_Level" type="Node2D"]
+[node name="TestLevel" type="Node2D"]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_dcm5e")
+environment = SubResource("Environment_pul7b")
 
-[node name="BackgroundCanvasLayer" parent="." instance=ExtResource("1_4n315")]
+[node name="BackgroundCanvasLayer" parent="." instance=ExtResource("1_ae6xs")]
+
+[node name="CanvasMainLayer" type="CanvasLayer" parent="."]
+follow_viewport_enabled = true
+
+[node name="Player" parent="CanvasMainLayer" instance=ExtResource("2_xsvjw")]
+
+[node name="Entity" parent="CanvasMainLayer" instance=ExtResource("4_ipof0")]
+position = Vector2(164, 116)
+
+[node name="Camera2D" parent="CanvasMainLayer" instance=ExtResource("3_gvi7n")]
+
+[node name="GameUI" parent="CanvasMainLayer" instance=ExtResource("5_uxjwa")]

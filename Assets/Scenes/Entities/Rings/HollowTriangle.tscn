@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://uxxm34piowex"]
+
+[ext_resource type="Texture2D" uid="uid://c34ci0q7yin71" path="res://Assets/Sprites/Spritesheets/MainSpritesheet.png" id="1_ulfuc"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eg23a"]
+atlas = ExtResource("1_ulfuc")
+region = Rect2(76, 12, 40, 40)
+
+[node name="RingPivot" type="Marker2D"]
+
+[node name="Ring" type="Sprite2D" parent="."]
+texture = SubResource("AtlasTexture_eg23a")

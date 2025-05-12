@@ -1,0 +1,125 @@
+[gd_scene load_steps=9 format=3 uid="uid://dsom634ksmdbf"]
+
+[ext_resource type="PackedScene" uid="uid://s0pn7ecryck1" path="res://Assets/Scenes/Backgrounds/SpaceBackground.tscn" id="1_4ghog"]
+[ext_resource type="Script" path="res://Assets/Scripts/UI/main_menu.gd" id="1_qk3pt"]
+[ext_resource type="Texture2D" uid="uid://wom6qdh8o3f8" path="res://Assets/Sprites/Spritesheets/UISpritesheet.png" id="2_ytohy"]
+[ext_resource type="FontFile" uid="uid://de13kh3x6rwq3" path="res://Assets/Fonts/millennia/FH-Millennia WTT/MILLENNIA.TTF" id="3_1rdid"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fq8ph"]
+atlas = ExtResource("2_ytohy")
+region = Rect2(18, 82, 44, 12)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x6ukx"]
+atlas = ExtResource("2_ytohy")
+region = Rect2(146, 82, 44, 12)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lc0xg"]
+atlas = SubResource("AtlasTexture_x6ukx")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t82do"]
+atlas = ExtResource("2_ytohy")
+region = Rect2(80, 80, 48, 16)
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_qk3pt")
+
+[node name="BackgroundCanvasLayer" parent="." instance=ExtResource("1_4ghog")]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Container" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+grow_horizontal = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+
+[node name="Title" type="Label" parent="CanvasLayer/Container"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -440.0
+offset_right = 440.0
+offset_bottom = 182.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.608507, 0.824178, 1, 0.32549)
+theme_override_colors/font_shadow_color = Color(0.350436, 0.572769, 1, 0.443137)
+theme_override_constants/shadow_offset_x = 5
+theme_override_fonts/font = ExtResource("3_1rdid")
+theme_override_font_sizes/font_size = 181
+text = "Starfeller"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Container"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -22.0
+offset_top = 245.0
+offset_right = 22.0
+offset_bottom = 257.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="StartButton" type="TextureButton" parent="CanvasLayer/Container/VBoxContainer"]
+self_modulate = Color(0.317647, 0.513726, 1, 0.682353)
+texture_filter = 1
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 2
+texture_normal = SubResource("AtlasTexture_fq8ph")
+texture_pressed = SubResource("AtlasTexture_lc0xg")
+texture_hover = SubResource("AtlasTexture_t82do")
+stretch_mode = 0
+
+[node name="StartLabel" type="Label" parent="CanvasLayer/Container/VBoxContainer/StartButton"]
+layout_mode = 0
+offset_left = 33.0
+offset_top = -2.0
+offset_right = 178.0
+offset_bottom = 55.0
+theme_override_colors/font_color = Color(1, 1, 1, 0.721569)
+theme_override_colors/font_shadow_color = Color(1, 1, 1, 0.184314)
+theme_override_constants/shadow_offset_x = 5
+theme_override_fonts/font = ExtResource("3_1rdid")
+theme_override_font_sizes/font_size = 56
+text = "Start"
+horizontal_alignment = 1
+
+[node name="ExitButton" type="TextureButton" parent="CanvasLayer/Container/VBoxContainer"]
+self_modulate = Color(0.317647, 0.513726, 1, 0.682353)
+texture_filter = 1
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 2
+texture_normal = SubResource("AtlasTexture_fq8ph")
+texture_pressed = SubResource("AtlasTexture_lc0xg")
+texture_hover = SubResource("AtlasTexture_t82do")
+stretch_mode = 0
+
+[node name="ExitLabel" type="Label" parent="CanvasLayer/Container/VBoxContainer/ExitButton"]
+layout_mode = 0
+offset_left = 33.0
+offset_top = -2.0
+offset_right = 178.0
+offset_bottom = 55.0
+theme_override_colors/font_color = Color(1, 1, 1, 0.721569)
+theme_override_colors/font_shadow_color = Color(1, 1, 1, 0.184314)
+theme_override_constants/shadow_offset_x = 5
+theme_override_fonts/font = ExtResource("3_1rdid")
+theme_override_font_sizes/font_size = 56
+text = "Exit"
+horizontal_alignment = 1
+
+[connection signal="pressed" from="CanvasLayer/Container/VBoxContainer/StartButton" to="." method="_on_texture_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/Container/VBoxContainer/StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/Container/VBoxContainer/ExitButton" to="." method="_on_exit_button_pressed"]

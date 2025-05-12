@@ -1,0 +1,43 @@
+[gd_scene load_steps=6 format=3 uid="uid://bufda618anvye"]
+
+[ext_resource type="Script" path="res://Assets/Scripts/UI/game_ui.gd" id="1_1688s"]
+[ext_resource type="FontFile" uid="uid://de13kh3x6rwq3" path="res://Assets/Fonts/millennia/FH-Millennia WTT/MILLENNIA.TTF" id="2_bj5hb"]
+[ext_resource type="Texture2D" uid="uid://wom6qdh8o3f8" path="res://Assets/Sprites/Spritesheets/UISpritesheet.png" id="2_coyuv"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s0wkh"]
+atlas = ExtResource("2_coyuv")
+region = Rect2(247, 23, 85, 38)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v4eig"]
+atlas = ExtResource("2_coyuv")
+region = Rect2(128, 2, 94, 61)
+
+[node name="GameUI" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_1688s")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 4
+
+[node name="Marker2D" type="Marker2D" parent="CanvasLayer"]
+position = Vector2(136, 32)
+scale = Vector2(3, 2)
+
+[node name="Sprite2D2" type="Sprite2D" parent="CanvasLayer/Marker2D"]
+modulate = Color(0, 0.16221, 0.304231, 0.568627)
+position = Vector2(2, 9)
+texture = SubResource("AtlasTexture_s0wkh")
+
+[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer/Marker2D"]
+modulate = Color(0, 0.255121, 0.469457, 1)
+texture = SubResource("AtlasTexture_v4eig")
+
+[node name="Score" type="Label" parent="CanvasLayer"]
+offset_left = 28.0
+offset_top = 33.0
+offset_right = 191.0
+offset_bottom = 83.0
+theme_override_fonts/font = ExtResource("2_bj5hb")
+theme_override_font_sizes/font_size = 30
+text = "Score: "
