@@ -5,7 +5,7 @@ var WeaponsDictionary = {
 		"weaponType" : "UREB",
 		"weaponReloadType" : "Charge",
 
-		"bulletSpeed" : 1000,
+		"bulletSpeed" : 1500,
 
 		"baseRecoil" : 100,
 		"recoil" : 0,

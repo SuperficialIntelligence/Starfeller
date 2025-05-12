@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://daucir8jfrclg"]
+
+[ext_resource type="Script" path="res://Assets/Scripts/Misc/spawn_center.gd" id="1_uufl7"]
+
+[node name="SpawnCenter" type="Marker2D"]
+script = ExtResource("1_uufl7")
+
+[node name="SpawnPoint" type="Marker2D" parent="."]
+position = Vector2(4000, 0)

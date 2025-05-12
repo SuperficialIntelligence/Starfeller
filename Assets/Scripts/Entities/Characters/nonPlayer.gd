@@ -27,7 +27,7 @@ func _physics_process(delta: float) -> void:
 			YDirection = -1
 		if((targetPosition.y - position.y) > 0):
 			YDirection = 1
-		if(global_position.distance_to(targetPosition + position) < 500):
+		if(global_position.distance_to(targetPosition + position) < 750):
 			XDirection *= -1
 			YDirection *= -1
 			
@@ -49,13 +49,13 @@ func _physics_process(delta: float) -> void:
 			else:
 				releaseEquipLeft()
 			
-		if(((global_position.distance_to(targetPosition + position) < 500 or global_position.distance_to(targetPosition + position) > 1500) and slot != 1)):
+		if(((global_position.distance_to(targetPosition + position) < 750 or global_position.distance_to(targetPosition + position) > 2000) and slot != 1)):
 			slot = 1
 			if(equipsList.size() <= slot):
 				slot = 0
 			activeEquips.append(equipsList[slot])
 			activeEquips.pop_front()
-			if((global_position.distance_to(targetPosition + position) > 1500) and slot == 1):
+			if((global_position.distance_to(targetPosition + position) > 2000) and slot == 1):
 				for item in activeEquips:
 					if(item.flip == false):
 						flipEquip()
@@ -98,7 +98,6 @@ func _on_detection_area_body_exited(body: Node2D) -> void:
 		targetBullet = null
 
 func _on_hurt_box_area_body_entered(body: Node2D) -> void:
-	print(body.is_in_group("PlayerBullets"))
 	if(body.is_in_group("PlayerBullets")):
 		damageTaken = body.damage
 		hitFrom = body.global_rotation

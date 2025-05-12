@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://3s5248yc2xj0"]
+[gd_scene load_steps=8 format=3 uid="uid://3s5248yc2xj0"]
 
 [ext_resource type="PackedScene" uid="uid://s0pn7ecryck1" path="res://Assets/Scenes/Backgrounds/SpaceBackground.tscn" id="1_ae6xs"]
 [ext_resource type="PackedScene" uid="uid://d4c07dfhde07" path="res://Assets/Scenes/Entities/Player/player.tscn" id="2_xsvjw"]
 [ext_resource type="PackedScene" uid="uid://bbyuse885lh46" path="res://Assets/Scenes/UI/camera_2d.tscn" id="3_gvi7n"]
 [ext_resource type="PackedScene" uid="uid://c05ydg4ec5wly" path="res://Assets/Scenes/Entities/Stars/enemybasic.tscn" id="4_ipof0"]
+[ext_resource type="PackedScene" uid="uid://daucir8jfrclg" path="res://Assets/Scenes/UI/spawn_center.tscn" id="5_0ndm3"]
 [ext_resource type="PackedScene" uid="uid://bufda618anvye" path="res://Assets/Scenes/UI/game_ui.tscn" id="5_uxjwa"]
 
 [sub_resource type="Environment" id="Environment_pul7b"]
@@ -29,5 +30,7 @@ follow_viewport_enabled = true
 position = Vector2(164, 116)
 
 [node name="Camera2D" parent="CanvasMainLayer" instance=ExtResource("3_gvi7n")]
+
+[node name="SpawnCenter" parent="CanvasMainLayer/Camera2D" instance=ExtResource("5_0ndm3")]
 
 [node name="GameUI" parent="CanvasMainLayer" instance=ExtResource("5_uxjwa")]

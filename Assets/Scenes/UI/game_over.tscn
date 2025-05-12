@@ -1,33 +1,25 @@
-[gd_scene load_steps=13 format=3 uid="uid://dsom634ksmdbf"]
+[gd_scene load_steps=11 format=3 uid="uid://1c1a8sx06wtd"]
 
-[ext_resource type="PackedScene" uid="uid://s0pn7ecryck1" path="res://Assets/Scenes/Backgrounds/SpaceBackground.tscn" id="1_4ghog"]
-[ext_resource type="Script" path="res://Assets/Scripts/UI/main_menu.gd" id="1_qk3pt"]
-[ext_resource type="Texture2D" uid="uid://wom6qdh8o3f8" path="res://Assets/Sprites/Spritesheets/UISpritesheet.png" id="2_ytohy"]
-[ext_resource type="FontFile" uid="uid://de13kh3x6rwq3" path="res://Assets/Fonts/millennia/FH-Millennia WTT/MILLENNIA.TTF" id="3_1rdid"]
-
-[sub_resource type="Environment" id="Environment_e6qo6"]
-background_mode = 3
-background_color = Color(1, 1, 1, 1)
-background_canvas_max_layer = 10
-glow_enabled = true
-glow_bloom = 1.0
+[ext_resource type="Script" path="res://Assets/Scripts/UI/main_menu.gd" id="1_ab2wb"]
+[ext_resource type="FontFile" uid="uid://de13kh3x6rwq3" path="res://Assets/Fonts/millennia/FH-Millennia WTT/MILLENNIA.TTF" id="3_040pf"]
+[ext_resource type="Texture2D" uid="uid://wom6qdh8o3f8" path="res://Assets/Sprites/Spritesheets/UISpritesheet.png" id="4_twyy5"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fq8ph"]
-atlas = ExtResource("2_ytohy")
+atlas = ExtResource("4_twyy5")
 region = Rect2(18, 82, 44, 12)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_x6ukx"]
-atlas = ExtResource("2_ytohy")
+atlas = ExtResource("4_twyy5")
 region = Rect2(146, 82, 44, 12)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_lc0xg"]
 atlas = SubResource("AtlasTexture_x6ukx")
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_t82do"]
-atlas = ExtResource("2_ytohy")
+atlas = ExtResource("4_twyy5")
 region = Rect2(80, 80, 48, 16)
 
-[sub_resource type="Animation" id="Animation_i41c2"]
+[sub_resource type="Animation" id="Animation_p61vn"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -42,7 +34,7 @@ tracks/0/keys = {
 "values": [Color(1, 1, 1, 0)]
 }
 
-[sub_resource type="Animation" id="Animation_xd4ql"]
+[sub_resource type="Animation" id="Animation_gu5c7"]
 resource_name = "fade_in"
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -57,27 +49,24 @@ tracks/0/keys = {
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_mwnsm"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_yt5v5"]
 _data = {
-"RESET": SubResource("Animation_i41c2"),
-"fade_in": SubResource("Animation_xd4ql")
+"RESET": SubResource("Animation_p61vn"),
+"fade_in": SubResource("Animation_gu5c7")
 }
 
-[node name="MainMenu" type="Control"]
+[node name="GameOver" type="Control"]
+modulate = Color(1, 1, 1, 0)
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_qk3pt")
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_e6qo6")
-
-[node name="BackgroundCanvasLayer" parent="." instance=ExtResource("1_4ghog")]
+script = ExtResource("1_ab2wb")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 5
 
 [node name="Container" type="Control" parent="CanvasLayer"]
 modulate = Color(1, 1, 1, 0)
@@ -101,9 +90,9 @@ grow_horizontal = 2
 theme_override_colors/font_color = Color(0.608507, 0.824178, 1, 0.32549)
 theme_override_colors/font_shadow_color = Color(0.350436, 0.572769, 1, 0.443137)
 theme_override_constants/shadow_offset_x = 5
-theme_override_fonts/font = ExtResource("3_1rdid")
+theme_override_fonts/font = ExtResource("3_040pf")
 theme_override_font_sizes/font_size = 181
-text = "Starfeller"
+text = "Game Over"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Container"]
 layout_mode = 1
@@ -138,9 +127,9 @@ offset_bottom = 55.0
 theme_override_colors/font_color = Color(1, 1, 1, 0.721569)
 theme_override_colors/font_shadow_color = Color(1, 1, 1, 0.184314)
 theme_override_constants/shadow_offset_x = 5
-theme_override_fonts/font = ExtResource("3_1rdid")
+theme_override_fonts/font = ExtResource("3_040pf")
 theme_override_font_sizes/font_size = 56
-text = "Start"
+text = "Retry"
 horizontal_alignment = 1
 
 [node name="ExitButton" type="TextureButton" parent="CanvasLayer/Container/VBoxContainer"]
@@ -162,14 +151,14 @@ offset_bottom = 55.0
 theme_override_colors/font_color = Color(1, 1, 1, 0.721569)
 theme_override_colors/font_shadow_color = Color(1, 1, 1, 0.184314)
 theme_override_constants/shadow_offset_x = 5
-theme_override_fonts/font = ExtResource("3_1rdid")
+theme_override_fonts/font = ExtResource("3_040pf")
 theme_override_font_sizes/font_size = 56
 text = "Exit"
 horizontal_alignment = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_mwnsm")
+"": SubResource("AnimationLibrary_yt5v5")
 }
 
 [connection signal="pressed" from="CanvasLayer/Container/VBoxContainer/StartButton" to="." method="_on_texture_button_pressed"]

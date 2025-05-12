@@ -12,6 +12,7 @@ extends CharacterBody2D
 @onready var Particles = preload("res://Assets/Scenes/Particles/particles.tscn")
 @onready var UREB = preload("res://Assets/Scenes/Entities/Weapons/ureb.tscn")
 @onready var StellarEngine = preload("res://Assets/Scenes/Entities/Weapons/stellar_engine.tscn")
+@onready var GameOverScreen = preload("res://Assets/Scenes/UI/game_over.tscn")
 
 @onready var charactersDictionary = CharactersDictionary.CharactersDictionary
 
@@ -212,6 +213,11 @@ func hurt():
 		
 		if(is_in_group("Player") == false):
 			Global.score += 10
+		else:
+			var endScreen = GameOverScreen.instantiate()
+			get_parent().add_child(endScreen)
+
+
 		
 		queue_free()
 		
