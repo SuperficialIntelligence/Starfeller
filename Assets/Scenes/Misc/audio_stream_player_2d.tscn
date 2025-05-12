@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://dbg7rr1fhjev0"]
+
+[ext_resource type="Script" path="res://Assets/Scripts/Misc/audio_stream_player_2d.gd" id="1_w5v4x"]
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D"]
+max_polyphony = 7
+script = ExtResource("1_w5v4x")

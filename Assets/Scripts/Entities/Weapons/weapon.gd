@@ -4,6 +4,7 @@ extends Node2D
 @onready var BarrelPivot = $WeaponPivot/Weapon/BarrelPivot
 @onready var WeaponPivot = $WeaponPivot
 @onready var UseAnimationPlayer = $UseAnimationPlayer
+@onready var Sound = preload("res://Assets/Scenes/Misc/audio_stream_player_2d.tscn")
 @onready var Laser = preload("res://Assets/Scenes/Entities/Bullets/bullet.tscn")
 @onready var Particles = preload("res://Assets/Scenes/Particles/particles.tscn")
 
@@ -36,6 +37,7 @@ var bulletsLoaded = 0
 var fireRateTimer = 0
 var reloadTimer = 0
 var flip = false
+var held = false
 
 func _ready() -> void:
 	initialize_stats()
@@ -82,6 +84,17 @@ func activate_left_click():
 	
 	if(bulletsLoaded < bulletAmount):
 		if(weaponReloadType == "Charge" and bulletsLoaded <= 0):
+			if(held == false):
+				var sound = Sound.instantiate()
+				sound.position = position
+				sound.pitch_scale = randf_range(0.6, 1)
+				sound.volume_db = -5
+				
+				sound.audio = preload("res://Assets/Sounds/SFX/explosion/explosion.wav")
+				get_parent().add_child(sound)
+				sound.play()
+				held = true
+			
 			reloadTimer += 1
 			if(reloadTimer < 10):
 				var particles = Particles.instantiate()
@@ -126,6 +139,7 @@ func release_right_click():
 	pass
 	
 func useLeft():
+	held = false
 	if(bulletType != null):
 		var bullet = bulletType.instantiate()
 		bullet.dir = WeaponPivot.rotation + deg_to_rad(randf_range(-spread, spread))
@@ -140,6 +154,27 @@ func useLeft():
 			bullet.add_to_group("EnemyBullets")
 		
 		get_tree().root.get_child(3).get_node("CanvasMainLayer").add_child(bullet)
+		
+		var sound = Sound.instantiate()
+		sound.position = position
+		sound.pitch_scale = randf_range(0.8, 1.2)
+		
+		var random = randi_range(0, 1)
+		if(random == 1):
+			sound.audio = preload("res://Assets/Sounds/SFX/laser_shoot/laserShoot(3).wav")
+		if(random == 0):
+			sound.audio = preload("res://Assets/Sounds/SFX/laser_shoot/laserShoot.wav")
+		get_parent().add_child(sound)
+		sound.play()
+	
+	else:
+		var sound = Sound.instantiate()
+		sound.position = position
+		sound.pitch_scale = randf_range(0.8, 1.2)
+		sound.volume_db = 5
+		sound.audio = preload("res://Assets/Sounds/SFX/laser_shoot/laserShoot(2).wav")
+		get_parent().add_child(sound)
+		sound.play()
 	
 	rotationSpeed = baseRotationSpeed / 2
 	

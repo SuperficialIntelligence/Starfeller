@@ -1,3 +1,6 @@
 Star background shader: https://godotshaders.com/shader/space-background-parallax/
 Nebula Background Shader: https://godotshaders.com/shader/nebula-stars-clouds/
 Pixelation Shader: https://godotshaders.com/shader/256-colour-pixelation/
+Sound Effects Made Using: https://sfxr.me/
+Music made using: Bandlab
+Pixel Art made using: Aseprite

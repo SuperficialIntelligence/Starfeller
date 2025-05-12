@@ -104,6 +104,7 @@ rotation = 0.785398
 [node name="DetectionArea" type="Area2D" parent="." groups=["Enemy"]]
 collision_layer = 0
 collision_mask = 3
+monitorable = false
 
 [node name="DetectionBox" type="CollisionShape2D" parent="DetectionArea"]
 shape = SubResource("CircleShape2D_lh440")
@@ -111,6 +112,7 @@ shape = SubResource("CircleShape2D_lh440")
 [node name="HurtBoxArea" type="Area2D" parent="."]
 collision_layer = 0
 collision_mask = 2
+monitorable = false
 
 [node name="HurtBox" type="CollisionShape2D" parent="HurtBoxArea"]
 shape = SubResource("CircleShape2D_84mtd")

@@ -9,6 +9,7 @@ extends CharacterBody2D
 @onready var Rings = $Rings
 @onready var HurtBoxArea = $HurtBoxArea
 @onready var HealthBar = $HealthBar
+@onready var Sound = preload("res://Assets/Scenes/Misc/audio_stream_player_2d.tscn")
 @onready var Particles = preload("res://Assets/Scenes/Particles/particles.tscn")
 @onready var UREB = preload("res://Assets/Scenes/Entities/Weapons/ureb.tscn")
 @onready var StellarEngine = preload("res://Assets/Scenes/Entities/Weapons/stellar_engine.tscn")
@@ -69,6 +70,9 @@ func _ready() -> void:
 	equipsList.append(weapon)
 	
 	activeEquips.append(equipsList[slot])
+	
+	if(is_in_group("Enemy")):
+		Global.chaos += 0.4
 	
 func initialize_stats():
 	maxEyeDistance = charactersDictionary[type]["maxEyeDistance"]
@@ -194,6 +198,18 @@ func hurt():
 	particles.lifetime = 0.8
 	get_tree().root.get_child(3).get_node("CanvasMainLayer").add_child(particles)
 	
+	var sound = Sound.instantiate()
+	sound.position = position
+	sound.pitch_scale = randf_range(0.8, 1.2)
+	
+	var random = randi_range(0, 1)
+	if(random == 0):
+		sound.audio = preload("res://Assets/Sounds/SFX/hit_hurt/hitHurt(2).wav")
+	else:
+		sound.audio = preload("res://Assets/Sounds/SFX/hit_hurt/hitHurt(5).wav")
+	get_parent().add_child(sound)
+	sound.play()
+	
 	
 	if(hp <= 0):
 		particles = Particles.instantiate()
@@ -213,9 +229,17 @@ func hurt():
 		
 		if(is_in_group("Player") == false):
 			Global.score += 10
+			Global.chaos -= 0.4
 		else:
 			var endScreen = GameOverScreen.instantiate()
 			get_parent().add_child(endScreen)
+		
+		sound = Sound.instantiate()
+		sound.position = position
+		sound.pitch_scale = randf_range(0.8, 1.2)
+		sound.audio = preload("res://Assets/Sounds/SFX/explosion/explosion(2).wav")
+		get_parent().add_child(sound)
+		sound.play()
 
 
 		

@@ -5,3 +5,6 @@
 [node name="Camera2D" type="Camera2D"]
 process_callback = 0
 script = ExtResource("1_hosm2")
+
+[node name="AudioListener2D" type="AudioListener2D" parent="."]
+current = true

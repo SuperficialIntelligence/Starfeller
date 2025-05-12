@@ -1,9 +1,10 @@
-[gd_scene load_steps=13 format=3 uid="uid://dsom634ksmdbf"]
+[gd_scene load_steps=14 format=3 uid="uid://dsom634ksmdbf"]
 
 [ext_resource type="PackedScene" uid="uid://s0pn7ecryck1" path="res://Assets/Scenes/Backgrounds/SpaceBackground.tscn" id="1_4ghog"]
 [ext_resource type="Script" path="res://Assets/Scripts/UI/main_menu.gd" id="1_qk3pt"]
 [ext_resource type="Texture2D" uid="uid://wom6qdh8o3f8" path="res://Assets/Sprites/Spritesheets/UISpritesheet.png" id="2_ytohy"]
 [ext_resource type="FontFile" uid="uid://de13kh3x6rwq3" path="res://Assets/Fonts/millennia/FH-Millennia WTT/MILLENNIA.TTF" id="3_1rdid"]
+[ext_resource type="PackedScene" uid="uid://bbyuse885lh46" path="res://Assets/Scenes/UI/camera_2d.tscn" id="5_j20n8"]
 
 [sub_resource type="Environment" id="Environment_e6qo6"]
 background_mode = 3
@@ -166,6 +167,8 @@ theme_override_fonts/font = ExtResource("3_1rdid")
 theme_override_font_sizes/font_size = 56
 text = "Exit"
 horizontal_alignment = 1
+
+[node name="Camera2D" parent="CanvasLayer" instance=ExtResource("5_j20n8")]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
