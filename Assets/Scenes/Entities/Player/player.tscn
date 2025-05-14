@@ -31,10 +31,10 @@ radius = 11.0
 radius = 10.198
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4xuuy"]
-bg_color = Color(0.579254, 1.97336e-06, 3.85046e-07, 1)
+bg_color = Color(0.156863, 0.156863, 0.180392, 0)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5tg4y"]
-bg_color = Color(0.400884, 0.964544, 0, 1)
+bg_color = Color(1, 1, 1, 1)
 
 [node name="Entity" type="CharacterBody2D" groups=["Player"]]
 script = ExtResource("1_11tqh")
@@ -78,7 +78,7 @@ scale = Vector2(1.00417, 1.00417)
 texture = SubResource("AtlasTexture_ibgxt")
 
 [node name="Body" type="Sprite2D" parent="BodyCenter"]
-self_modulate = Color(0.988235, 1, 0, 0.682353)
+self_modulate = Color(0.988235, 1, 0, 0.65098)
 texture = SubResource("AtlasTexture_pylgh")
 
 [node name="EyesPivot" type="Marker2D" parent="BodyCenter"]

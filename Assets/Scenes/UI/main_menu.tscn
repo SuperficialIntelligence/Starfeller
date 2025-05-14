@@ -168,6 +168,26 @@ theme_override_font_sizes/font_size = 56
 text = "Exit"
 horizontal_alignment = 1
 
+[node name="Label" type="Label" parent="CanvasLayer/Container"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -310.5
+offset_top = 394.0
+offset_right = 310.5
+offset_bottom = 606.0
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("3_1rdid")
+theme_override_font_sizes/font_size = 40
+text = "Controls:
+WASD for movement
+Hold left click to use equipped item
+Right click to swap equipped item
+Shift to invert item direction
+Scroll to zoom"
+horizontal_alignment = 1
+
 [node name="Camera2D" parent="CanvasLayer" instance=ExtResource("5_j20n8")]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

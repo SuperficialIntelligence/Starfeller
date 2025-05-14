@@ -91,7 +91,6 @@ position = Vector2(27, 0)
 texture = SubResource("AtlasTexture_h3e86")
 
 [node name="WeaponSprite" type="Sprite2D" parent="WeaponPivot/Weapon"]
-self_modulate = Color(1, 0.862555, 0.43641, 1)
 texture = SubResource("AtlasTexture_sad4l")
 
 [node name="BarrelPivot" type="Marker2D" parent="WeaponPivot/Weapon"]
@@ -104,7 +103,6 @@ position = Vector2(5, 0)
 texture = SubResource("AtlasTexture_yd7sn")
 
 [node name="BarrelSprite" type="Sprite2D" parent="WeaponPivot/Weapon/BarrelPivot/Barrel"]
-self_modulate = Color(1, 0.862745, 0.435294, 1)
 texture = SubResource("AtlasTexture_nxt01")
 
 [node name="UseAnimationPlayer" type="AnimationPlayer" parent="."]

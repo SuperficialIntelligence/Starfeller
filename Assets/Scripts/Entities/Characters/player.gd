@@ -29,8 +29,46 @@ func _physics_process(delta: float) -> void:
 		if(Input.is_action_just_pressed("ui_right_click") == true):
 			swapEquip()
 			
+		if(Global.score >= 10):
+			if(Input.is_action_just_pressed("ui_1") == true):
+				Global.score -= 10
+				maxHp += 20
+				hp = maxHp
+				healthbarUpdate()
+				
+				playUpgradeSound()
+			
+			if(Input.is_action_just_pressed("ui_2") == true):
+				Global.score -= 10
+				maxSpeed += 20
+				accelleration += 20
+				
+				playUpgradeSound()
+			
+			if(Input.is_action_just_pressed("ui_3") == true):
+				Global.score -= 10
+				equipsList[0].bulletDamage += 5
+				
+				playUpgradeSound()
+				
+			if(Input.is_action_just_pressed("ui_4") == true):
+				Global.score -= 10
+				equipsList[0].reloadTime /= 1.75
+				
+				playUpgradeSound()
+				
+			
 func _on_hurt_box_area_body_entered(body: Node2D) -> void:
 	if(body.is_in_group("EnemyBullets")):
 		damageTaken = body.damage
 		hitFrom = body.global_rotation
 		hurt()
+
+func playUpgradeSound():
+	var sound = Sound.instantiate()
+	sound.position = position
+	sound.pitch_scale = randf_range(0.8, 1.2)
+	sound.audio = preload("res://Assets/Sounds/SFX/power_up/powerUp(3).wav")
+	get_parent().add_child(sound)
+	sound.play()
+	

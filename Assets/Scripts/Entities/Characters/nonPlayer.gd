@@ -8,29 +8,31 @@ var targetBullet
 var shootingTimer = 0
 var weaponPivot
 
-func _physics_process(delta: float) -> void:
-	if(detectedEntities.size() != 0):
+#AI
+@onready var enemyAggro = randf_range(0, 600)
+
+func _physics_process(delta: float) -> void:	
+	if(detectedBullets.size() != 0):
+		targetBullet = detectedBullets[0]
+		if(global_position.distance_to(targetBullet.global_position - global_position) < 200):
+			targetPosition = targetBullet.global_position - global_position
+			
+	elif(detectedEntities.size() != 0):
 		target = detectedEntities[0]
 		targetPosition = target.position - position
 			
-	if(detectedBullets.size() != 0):
-		targetBullet = detectedBullets[0]
-		if(global_position.distance_to(targetBullet.position + position) < 500):
-			targetPosition = -(targetBullet.position - position)
-			
 	if(targetBullet != null or target != null):
-		if((targetPosition.x - position.x) < 0):
+		if((targetPosition.x) <= 0):
 			XDirection = -1
-		if((targetPosition.x - position.x) > 0):
+		if((targetPosition.x) >= 0):
 			XDirection = 1
-		if((targetPosition.y - position.y) < 0):
+		if((targetPosition.y) <= 0):
 			YDirection = -1
-		if((targetPosition.y - position.y) > 0):
+		if((targetPosition.y) >= 0):
 			YDirection = 1
-		if(global_position.distance_to(targetPosition + position) < 750):
+		if(global_position.distance_to(targetPosition + global_position) < enemyAggro):
 			XDirection *= -1
 			YDirection *= -1
-			
 	
 	moveRings()
 	idleMoveEquip()
@@ -39,36 +41,32 @@ func _physics_process(delta: float) -> void:
 	eyeMovements()
 
 	if(equipsList != null):
-		shootingTimer += 1 
 		for item in activeEquips:
 			recoil = item.recoil
 			weaponPivot = item.WeaponPivot
 			
-			if(weaponPivot.rotation < weaponPivot.rotation + abs((targetPosition - weaponPivot.position).normalized().angle() * 1.1)):
-				useEquipLeft()
-			else:
-				releaseEquipLeft()
-			
-		if(((global_position.distance_to(targetPosition + position) < 750 or global_position.distance_to(targetPosition + position) > 2000) and slot != 1)):
-			slot = 1
-			if(equipsList.size() <= slot):
-				slot = 0
-			activeEquips.append(equipsList[slot])
-			activeEquips.pop_front()
-			if((global_position.distance_to(targetPosition + position) > 2000) and slot == 1):
-				for item in activeEquips:
-					if(item.flip == false):
-						flipEquip()
-			else:
-				for item in activeEquips:
-					if(item.flip == true):
-						unFlipEquip()
-		elif(slot == 1):
+		if(slot == 1 and not (global_position.distance_to(targetPosition + global_position) < enemyAggro or global_position.distance_to(targetPosition + global_position) > 1000)):
 			slot = 0
 			if(equipsList.size() <= slot):
 				slot = 0
 			activeEquips.append(equipsList[slot])
 			activeEquips.pop_front()
+		else:
+			slot = 1
+			if(equipsList.size() < slot):
+				slot = 0
+			activeEquips.append(equipsList[slot])
+			activeEquips.pop_front()
+			
+		if((global_position.distance_to(targetPosition + global_position) > 1000) and slot == 1):
+			flipEquip()
+		else:
+			unFlipEquip()
+			
+		if(weaponPivot.rotation < weaponPivot.rotation + abs((targetPosition - weaponPivot.position).normalized().angle() * 1.1)):
+			useEquipLeft()
+		else:
+			releaseEquipLeft()
 
 func _on_detection_area_body_entered(body: Node2D) -> void:
 	if(body.is_in_group("Player") == true):
@@ -78,6 +76,7 @@ func _on_detection_area_body_entered(body: Node2D) -> void:
 	if(body.is_in_group("PlayerBullets") == true):
 		if(!detectedBullets.has(body)):
 			detectedBullets.append(body)
+			targetBullet = detectedBullets[0]
 			
 
 func _on_detection_area_body_exited(body: Node2D) -> void:

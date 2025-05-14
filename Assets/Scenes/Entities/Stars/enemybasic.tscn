@@ -34,7 +34,7 @@ radius = 40504.8
 radius = 10.198
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_embbe"]
-bg_color = Color(0.579254, 1.97336e-06, 3.85046e-07, 1)
+bg_color = Color(1, 1, 1, 0)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_86a8q"]
 bg_color = Color(0.400884, 0.964544, 0, 1)

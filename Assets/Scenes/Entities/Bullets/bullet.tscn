@@ -27,7 +27,7 @@ tracks/0/path = NodePath("BulletSprite:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
+"times": PackedFloat32Array(0, 0.933333),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
@@ -39,7 +39,7 @@ tracks/1/path = NodePath(".")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(1),
+"times": PackedFloat32Array(0.933333),
 "transitions": PackedFloat32Array(1),
 "values": [{
 "args": [],
@@ -81,7 +81,6 @@ position = Vector2(12.5, 0)
 texture = SubResource("AtlasTexture_ahs2g")
 
 [node name="BulletDetail" type="Sprite2D" parent="BulletSprite"]
-self_modulate = Color(1, 1, 0.388235, 1)
 texture = SubResource("AtlasTexture_1b13y")
 
 [node name="Center" type="Marker2D" parent="."]

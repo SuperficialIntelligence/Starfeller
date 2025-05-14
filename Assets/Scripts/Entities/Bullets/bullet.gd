@@ -2,7 +2,6 @@ extends CharacterBody2D
 
 @onready var BulletDetail = $BulletSprite/BulletDetail
 @onready var BulletOutline = $BulletSprite/BulletOutline
-@onready var BulletSprite = $BulletSprite
 @onready var Center = $Center
 @onready var CollisionBox = $CollisionBox
 @onready var FadeAnimation = $FadeAnimation
@@ -17,7 +16,6 @@ func _ready() -> void:
 	global_position = pos
 	global_rotation = rot
 	Center.rotation = rot
-	BulletSprite.self_modulate = col
 	FadeAnimation.play("fadeOut")
 
 func _physics_process(delta: float) -> void:

@@ -15,7 +15,7 @@ var WeaponsDictionary = {
 		"bulletAmount" : 10,
 
 		"firePerSec" : 0.1,
-		"reloadTime" : 0.9,
+		"reloadTime" : 2.1,
 		
 		"spread" : 0
 		

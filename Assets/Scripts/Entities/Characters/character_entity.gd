@@ -1,8 +1,8 @@
 class_name CharacterEntity
 extends CharacterBody2D
 
-@onready var Outline = $Outline
-@onready var Body = $Body
+@onready var Outline = $BodyCenter/Outline
+@onready var Body = $BodyCenter/Body
 @onready var EyesPivot = $BodyCenter/EyesPivot
 @onready var Eyes = $BodyCenter/EyesPivot/Eyes
 @onready var Equips = $Equips
@@ -58,6 +58,8 @@ var damageTaken = 0
 var hitFrom
 
 func _ready() -> void:
+	HealthBar.self_modulate = Body.self_modulate * 2
+		
 	healthbarUpdate()
 	createTrail()
 	
@@ -73,6 +75,10 @@ func _ready() -> void:
 	
 	if(is_in_group("Enemy")):
 		Global.chaos += 0.4
+		
+	for item in equipsList:
+		item.WeaponSprite.self_modulate = Body.self_modulate
+		item.BarrelSprite.self_modulate = Body.self_modulate
 	
 func initialize_stats():
 	maxEyeDistance = charactersDictionary[type]["maxEyeDistance"]
@@ -82,7 +88,9 @@ func initialize_stats():
 	accelleration = charactersDictionary[type]["accelleration"]
 	friction = charactersDictionary[type]["friction"]
 
-	var rotationSpeed = charactersDictionary[type]["rotationSpeed"]
+	rotationSpeed = charactersDictionary[type]["rotationSpeed"]
+	
+	maxHp = charactersDictionary[type]["maxHp"]
 	
 func eyeMovements():
 	var lookDirection = Vector2.ZERO.direction_to(targetPosition)
@@ -125,7 +133,7 @@ func useEquipLeft():
 		item.activate_left_click()
 	
 		recoilDirection = Vector2(cos(item.WeaponPivot.global_rotation), sin(item.WeaponPivot.global_rotation))
-		recoilDirection = -recoilDirection.normalized()
+		recoilDirection = -recoilDirection
 	
 	xSpeed += recoil * recoilDirection.x
 	ySpeed += recoil * recoilDirection.y
@@ -195,6 +203,7 @@ func hurt():
 	particles.one_shot = true
 	particles.amount = 50
 	particles.local_coords = true
+	particles.color = Body.self_modulate * 2
 	particles.lifetime = 0.8
 	get_tree().root.get_child(3).get_node("CanvasMainLayer").add_child(particles)
 	
@@ -222,6 +231,7 @@ func hurt():
 		particles.explosiveness = 1
 		particles.one_shot = true
 		particles.amount = 100
+		particles.color = Body.self_modulate * 2
 		particles.local_coords = true
 		particles.lifetime = 6
 		particles.scale = Vector2(2, 2)

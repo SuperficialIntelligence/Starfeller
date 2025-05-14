@@ -3,6 +3,8 @@ extends Node2D
 @onready var Barrel = $WeaponPivot/Weapon/BarrelPivot/Barrel
 @onready var BarrelPivot = $WeaponPivot/Weapon/BarrelPivot
 @onready var WeaponPivot = $WeaponPivot
+@onready var BarrelSprite = $WeaponPivot/Weapon/BarrelPivot/Barrel/BarrelSprite
+@onready var WeaponSprite = $WeaponPivot/Weapon/WeaponSprite
 @onready var UseAnimationPlayer = $UseAnimationPlayer
 @onready var Sound = preload("res://Assets/Scenes/Misc/audio_stream_player_2d.tscn")
 @onready var Laser = preload("res://Assets/Scenes/Entities/Bullets/bullet.tscn")
@@ -123,7 +125,7 @@ func activate_left_click():
 				particles.emission_sphere_radius = 30
 				particles.local_coords = true
 				particles.one_shot = true
-				particles.amount = 30
+				particles.amount = 15
 				particles.lifetime = 0.5 * reloadTime
 				BarrelPivot.add_child(particles)
 	
@@ -148,12 +150,14 @@ func useLeft():
 		bullet.rot = BarrelPivot.global_rotation - rotation
 		bullet.scale.x = 2
 		bullet.damage = bulletDamage
+		
 		if(get_parent().get_parent().is_in_group("Player") == true):
 			bullet.add_to_group("PlayerBullets")
 		else:
 			bullet.add_to_group("EnemyBullets")
 		
 		get_tree().root.get_child(3).get_node("CanvasMainLayer").add_child(bullet)
+		bullet.BulletDetail.self_modulate = WeaponSprite.self_modulate * 2
 		
 		var sound = Sound.instantiate()
 		sound.position = position
@@ -192,7 +196,8 @@ func useLeft():
 	particles.spread = 5 + spread
 	particles.explosiveness = 1
 	particles.one_shot = true
-	particles.amount = 20
+	particles.amount = 10
+	particles.color = WeaponSprite.self_modulate * 2
 	particles.local_coords = true
 	particles.lifetime = 0.8
 	get_tree().root.get_child(3).get_node("CanvasMainLayer").add_child(particles)

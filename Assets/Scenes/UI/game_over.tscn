@@ -156,6 +156,27 @@ theme_override_font_sizes/font_size = 56
 text = "Exit"
 horizontal_alignment = 1
 
+[node name="Label" type="Label" parent="CanvasLayer/Container"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -349.0
+offset_top = 355.0
+offset_right = 355.0
+offset_bottom = 610.0
+grow_horizontal = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("3_040pf")
+theme_override_font_sizes/font_size = 40
+text = "Tip:
+You can press numbers to spend score for upgrades!
+1 for health and heal
+2 for speed
+3 for damage
+4 for firerate"
+horizontal_alignment = 1
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_yt5v5")
