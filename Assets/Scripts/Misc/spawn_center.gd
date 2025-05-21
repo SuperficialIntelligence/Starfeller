@@ -2,7 +2,7 @@ extends Marker2D
 
 @onready var SpawnPoint = $SpawnPoint
 @onready var Enemy = preload("res://Assets/Scenes/Entities/Stars/enemybasic.tscn")
-var spawnRate = 10
+var spawnRate = 30
 var spawnTimer = 0
 
 func _physics_process(delta: float) -> void:

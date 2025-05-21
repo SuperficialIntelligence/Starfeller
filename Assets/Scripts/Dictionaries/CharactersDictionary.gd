@@ -11,6 +11,6 @@ var CharactersDictionary = {
 
 		"rotationSpeed" : 0.1,
 
-		"maxHp" : 100
+		"maxHp" : 30
 	}
 }

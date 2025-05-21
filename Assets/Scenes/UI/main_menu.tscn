@@ -195,6 +195,6 @@ libraries = {
 "": SubResource("AnimationLibrary_mwnsm")
 }
 
-[connection signal="pressed" from="CanvasLayer/Container/VBoxContainer/StartButton" to="." method="_on_texture_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/Container/VBoxContainer/StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/Container/VBoxContainer/StartButton" to="." method="_on_texture_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/Container/VBoxContainer/ExitButton" to="." method="_on_exit_button_pressed"]

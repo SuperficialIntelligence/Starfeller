@@ -13,6 +13,7 @@ extends CharacterBody2D
 @onready var Particles = preload("res://Assets/Scenes/Particles/particles.tscn")
 @onready var UREB = preload("res://Assets/Scenes/Entities/Weapons/ureb.tscn")
 @onready var StellarEngine = preload("res://Assets/Scenes/Entities/Weapons/stellar_engine.tscn")
+@onready var Electroshotgun = preload("res://Assets/Scenes/Entities/Weapons/electroshotgun.tscn")
 @onready var GameOverScreen = preload("res://Assets/Scenes/UI/game_over.tscn")
 
 @onready var charactersDictionary = CharactersDictionary.CharactersDictionary

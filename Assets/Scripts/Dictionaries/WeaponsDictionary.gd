@@ -3,7 +3,7 @@ extends Node
 var WeaponsDictionary = {
 	"UREB" : {
 		"weaponType" : "UREB",
-		"weaponReloadType" : "Charge",
+		"weaponReloadType" : "Store",
 
 		"bulletSpeed" : 1500,
 
@@ -12,10 +12,10 @@ var WeaponsDictionary = {
 
 		"baseRotationSpeed" : 0.1,
 
-		"bulletAmount" : 10,
+		"bulletAmount" : 1,
 
 		"firePerSec" : 0.1,
-		"reloadTime" : 2.1,
+		"reloadTime" : 0.5,
 		
 		"spread" : 0
 		
@@ -35,6 +35,24 @@ var WeaponsDictionary = {
 
 		"firePerSec" : 0,
 		"reloadTime" : 3,
+		
+		"spread" : 45,
+	},
+	"Electroshotgun" : {
+		"weaponType" : "Electroshotgun",
+		"weaponReloadType" : "Charge",
+
+		"bulletSpeed" : 500,
+
+		"baseRecoil" : 25,
+		"recoil" : 0,
+
+		"baseRotationSpeed" : 0.5,
+
+		"bulletAmount" : 30,
+
+		"firePerSec" : 0,
+		"reloadTime" : 6,
 		
 		"spread" : 45
 	}

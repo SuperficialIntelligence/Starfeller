@@ -14,7 +14,11 @@ region = Rect2(128, 2, 94, 61)
 
 [node name="GameUI" type="Control"]
 layout_mode = 3
-anchors_preset = 0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("1_1688s")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]

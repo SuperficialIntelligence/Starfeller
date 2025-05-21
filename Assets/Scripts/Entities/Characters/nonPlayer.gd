@@ -12,16 +12,12 @@ var weaponPivot
 @onready var enemyAggro = randf_range(0, 600)
 
 func _physics_process(delta: float) -> void:	
-	if(detectedBullets.size() != 0):
-		targetBullet = detectedBullets[0]
-		if(global_position.distance_to(targetBullet.global_position - global_position) < 200):
-			targetPosition = targetBullet.global_position - global_position
 			
-	elif(detectedEntities.size() != 0):
+	if(detectedEntities.size() != 0):
 		target = detectedEntities[0]
 		targetPosition = target.position - position
 			
-	if(targetBullet != null or target != null):
+	if(target != null):
 		if((targetPosition.x) <= 0):
 			XDirection = -1
 		if((targetPosition.x) >= 0):
@@ -72,29 +68,16 @@ func _on_detection_area_body_entered(body: Node2D) -> void:
 	if(body.is_in_group("Player") == true):
 		if(!detectedEntities.has(body)):
 			detectedEntities.append(body)
-	
-	if(body.is_in_group("PlayerBullets") == true):
-		if(!detectedBullets.has(body)):
-			detectedBullets.append(body)
-			targetBullet = detectedBullets[0]
 			
 
 func _on_detection_area_body_exited(body: Node2D) -> void:
 	if(detectedEntities.has(body)):
 		detectedEntities.erase(body)
 	
-	if(detectedBullets.has(body)):
-		detectedBullets.erase(body)
-	
 	if(detectedEntities.size() != 0):
 		target = detectedEntities[0]
 	else:
 		target = null
-		
-	if(detectedBullets.size() != 0):
-		targetBullet = detectedBullets[0]
-	else:
-		targetBullet = null
 
 func _on_hurt_box_area_body_entered(body: Node2D) -> void:
 	if(body.is_in_group("PlayerBullets")):

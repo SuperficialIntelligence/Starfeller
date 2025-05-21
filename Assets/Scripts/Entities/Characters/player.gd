@@ -1,5 +1,7 @@
 extends CharacterEntity
 
+@onready var Text = preload("res://Assets/Scenes/UI/text.tscn")
+
 func _physics_process(delta: float) -> void:
 	XDirection = Input.get_axis("ui_left", "ui_right")
 	YDirection = Input.get_axis("ui_up", "ui_down")
@@ -26,8 +28,14 @@ func _physics_process(delta: float) -> void:
 		if(Input.is_action_just_released("ui_left_click") == true):
 			releaseEquipLeft()
 			
-		if(Input.is_action_just_pressed("ui_right_click") == true):
+		if(Input.is_action_just_pressed("ui_e") == true):
 			swapEquip()
+			Global.currentEquip = activeEquips[0]
+			var text = Text.instantiate()
+			text.text = "Equipped " + str(Global.currentEquip.weaponType)
+			text.position = position
+			text.self_modulate = Body.self_modulate
+			add_child(text)
 			
 		if(Global.score >= 10):
 			if(Input.is_action_just_pressed("ui_1") == true):
@@ -41,7 +49,6 @@ func _physics_process(delta: float) -> void:
 			if(Input.is_action_just_pressed("ui_2") == true):
 				Global.score -= 10
 				maxSpeed += 20
-				accelleration += 20
 				
 				playUpgradeSound()
 			
@@ -71,4 +78,3 @@ func playUpgradeSound():
 	sound.audio = preload("res://Assets/Sounds/SFX/power_up/powerUp(3).wav")
 	get_parent().add_child(sound)
 	sound.play()
-	

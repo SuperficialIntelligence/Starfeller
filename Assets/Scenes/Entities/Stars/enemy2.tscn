@@ -1,9 +1,9 @@
-[gd_scene load_steps=15 format=3 uid="uid://c05ydg4ec5wly"]
+[gd_scene load_steps=15 format=3 uid="uid://c5tlwm41poul5"]
 
-[ext_resource type="Script" path="res://Assets/Scripts/Entities/Characters/nonPlayer.gd" id="1_mrg6w"]
-[ext_resource type="Texture2D" uid="uid://c34ci0q7yin71" path="res://Assets/Sprites/Spritesheets/MainSpritesheet.png" id="2_oltdb"]
-[ext_resource type="PackedScene" uid="uid://uxxm34piowex" path="res://Assets/Scenes/Entities/Rings/HollowTriangle.tscn" id="3_mkg75"]
-[ext_resource type="PackedScene" uid="uid://jeysi25fvt0b" path="res://Assets/Scenes/Entities/Rings/Triangle.tscn" id="4_nmmh2"]
+[ext_resource type="Script" path="res://Assets/Scripts/Entities/Characters/nonPlayer.gd" id="1_wruhc"]
+[ext_resource type="Texture2D" uid="uid://c34ci0q7yin71" path="res://Assets/Sprites/Spritesheets/MainSpritesheet.png" id="2_2ew3q"]
+[ext_resource type="PackedScene" uid="uid://uxxm34piowex" path="res://Assets/Scenes/Entities/Rings/HollowTriangle.tscn" id="3_m2a2a"]
+[ext_resource type="PackedScene" uid="uid://jeysi25fvt0b" path="res://Assets/Scenes/Entities/Rings/Triangle.tscn" id="4_kr2by"]
 
 [sub_resource type="Curve" id="Curve_tcpcs"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -13,15 +13,15 @@ point_count = 2
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ibgxt"]
-atlas = ExtResource("2_oltdb")
+atlas = ExtResource("2_2ew3q")
 region = Rect2(212, 20, 24, 24)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_pylgh"]
-atlas = ExtResource("2_oltdb")
+atlas = ExtResource("2_2ew3q")
 region = Rect2(22, 22, 20, 20)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1uqiu"]
-atlas = ExtResource("2_oltdb")
+atlas = ExtResource("2_2ew3q")
 region = Rect2(280, 92, 16, 7)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_0nqhw"]
@@ -40,7 +40,7 @@ bg_color = Color(1, 1, 1, 0)
 bg_color = Color(0.400884, 0.964544, 0, 1)
 
 [node name="Entity" type="CharacterBody2D" groups=["Enemy"]]
-script = ExtResource("1_mrg6w")
+script = ExtResource("1_wruhc")
 
 [node name="TrailParticles" type="CPUParticles2D" parent="."]
 amount = 50
@@ -81,7 +81,7 @@ scale = Vector2(1.00417, 1.00417)
 texture = SubResource("AtlasTexture_ibgxt")
 
 [node name="Body" type="Sprite2D" parent="BodyCenter"]
-self_modulate = Color(0.988235, 0, 0, 0.682353)
+self_modulate = Color(0.913555, 0.268045, 3.85046e-07, 0.682353)
 texture = SubResource("AtlasTexture_pylgh")
 
 [node name="EyesPivot" type="Marker2D" parent="BodyCenter"]
@@ -90,15 +90,16 @@ texture = SubResource("AtlasTexture_pylgh")
 texture = SubResource("AtlasTexture_1uqiu")
 
 [node name="CollisionBox" type="CollisionShape2D" parent="."]
+visible = false
 shape = SubResource("CircleShape2D_0nqhw")
 
 [node name="Equips" type="Marker2D" parent="."]
 
 [node name="Rings" type="Marker2D" parent="."]
 
-[node name="RingPivot" parent="Rings" instance=ExtResource("3_mkg75")]
+[node name="RingPivot" parent="Rings" instance=ExtResource("3_m2a2a")]
 
-[node name="RingPivot2" parent="Rings" instance=ExtResource("4_nmmh2")]
+[node name="RingPivot2" parent="Rings" instance=ExtResource("4_kr2by")]
 rotation = 0.785398
 
 [node name="DetectionArea" type="Area2D" parent="." groups=["Enemy"]]
