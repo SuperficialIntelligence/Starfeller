@@ -53,18 +53,27 @@ var currentTrail
 #Stats
 var maxHp = 100
 var hp = maxHp
+var damage = 10
 
 #misc
 var damageTaken = 0
 var hitFrom
+var weapon
+var weaponRandomizer
+var isDead = false
 
 func _ready() -> void:
 	HealthBar.self_modulate = Body.self_modulate * 2
 		
+	initialize_stats()
 	healthbarUpdate()
 	createTrail()
 	
-	var weapon = UREB.instantiate()
+	weaponRandomizer = randi_range(0,1)
+	if(weaponRandomizer == 0):
+		weapon = Electroshotgun.instantiate()
+	else:
+		weapon = UREB.instantiate()
 	Equips.add_child(weapon)
 	equipsList.append(weapon)
 	
@@ -75,7 +84,7 @@ func _ready() -> void:
 	activeEquips.append(equipsList[slot])
 	
 	if(is_in_group("Enemy")):
-		Global.chaos += 0.4
+		Global.chaos += 1
 		
 	for item in equipsList:
 		item.WeaponSprite.self_modulate = Body.self_modulate
@@ -90,8 +99,10 @@ func initialize_stats():
 	friction = charactersDictionary[type]["friction"]
 
 	rotationSpeed = charactersDictionary[type]["rotationSpeed"]
+	damage = charactersDictionary[type]["damage"]
 	
 	maxHp = charactersDictionary[type]["maxHp"]
+	hp = maxHp
 	
 func eyeMovements():
 	var lookDirection = Vector2.ZERO.direction_to(targetPosition)
@@ -202,7 +213,7 @@ func hurt():
 	particles.spread = 10
 	particles.explosiveness = 1
 	particles.one_shot = true
-	particles.amount = 50
+	particles.amount = 10
 	particles.local_coords = true
 	particles.color = Body.self_modulate * 2
 	particles.lifetime = 0.8
@@ -221,7 +232,7 @@ func hurt():
 	sound.play()
 	
 	
-	if(hp <= 0):
+	if(hp <= 0 and isDead == false):
 		particles = Particles.instantiate()
 		particles.global_position = global_position
 		particles.emitting = true
@@ -231,7 +242,7 @@ func hurt():
 		particles.spread = 180
 		particles.explosiveness = 1
 		particles.one_shot = true
-		particles.amount = 100
+		particles.amount = 20
 		particles.color = Body.self_modulate * 2
 		particles.local_coords = true
 		particles.lifetime = 6
@@ -240,7 +251,7 @@ func hurt():
 		
 		if(is_in_group("Player") == false):
 			Global.score += 10
-			Global.chaos -= 0.4
+			Global.chaos -= 1
 		else:
 			var endScreen = GameOverScreen.instantiate()
 			get_parent().add_child(endScreen)
@@ -253,7 +264,7 @@ func hurt():
 		sound.play()
 
 
-		
+		isDead = true
 		queue_free()
 		
 	

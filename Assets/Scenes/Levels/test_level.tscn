@@ -25,7 +25,7 @@ environment = SubResource("Environment_pul7b")
 follow_viewport_enabled = true
 
 [node name="Player" parent="CanvasMainLayer" instance=ExtResource("2_xsvjw")]
-position = Vector2(1218, 290)
+position = Vector2(1210, 290)
 
 [node name="Entity" parent="CanvasMainLayer" instance=ExtResource("4_ipof0")]
 position = Vector2(4080, 207)

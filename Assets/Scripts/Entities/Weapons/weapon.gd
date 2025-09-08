@@ -27,6 +27,7 @@ var baseRotationSpeed = 0.3
 
 var bulletAmount = 1
 
+var bulletsPerShot = 1
 var firePerSec = 1
 var reloadTime = 0.5
 
@@ -38,12 +39,13 @@ var rotationSpeed = baseRotationSpeed
 var bulletsLoaded = 0
 var fireRateTimer = 0
 var reloadTimer = 0
+var bulletsShot = 0
 var flip = false
 var held = false
 
 func _ready() -> void:
 	initialize_stats()
-	if(weaponType == "UREB"):
+	if(weaponType == "UREB" or weaponType == "Electroshotgun"):
 		bulletType = Laser
 	else:
 		bulletType = null
@@ -61,6 +63,7 @@ func initialize_stats():
 
 	bulletAmount = weaponDictionary[type]["bulletAmount"]
 
+	bulletsPerShot = weaponDictionary[type]["bulletsPerShot"]
 	firePerSec = weaponDictionary[type]["firePerSec"]
 	reloadTime = weaponDictionary[type]["reloadTime"]
 	
@@ -79,9 +82,12 @@ func activate_left_click():
 	recoil = 0
 	if(bulletsLoaded > 0):
 		if(fireRateTimer >= 60 * firePerSec):
-			bulletsLoaded -= 1
-			useLeft()
-			recoil = baseRecoil
+			while(bulletsShot <= bulletsPerShot):
+				useLeft()
+				bulletsLoaded -= 1
+				bulletsShot += 1
+				recoil = baseRecoil
+			bulletsShot = 0
 			fireRateTimer = 0
 	
 	if(bulletsLoaded < bulletAmount):
@@ -111,6 +117,7 @@ func activate_left_click():
 				particles.amount = 1
 				particles.lifetime = 0.5 * reloadTime
 				BarrelPivot.add_child(particles)
+
 		if(reloadTimer >= 60 * reloadTime):
 			reloadTimer = 0
 			bulletsLoaded = bulletAmount
@@ -119,13 +126,13 @@ func activate_left_click():
 				var particles = Particles.instantiate()
 				particles.position = BarrelPivot.position
 				particles.emitting = true
-				particles.radial_accel_min = -100 / (reloadTime / 3)
-				particles.radial_accel_max = -100 / (reloadTime / 3)
+				particles.radial_accel_min = -100 / (3 / reloadTime)
+				particles.radial_accel_max = -100 / (3 / reloadTime)
 				particles.emission_shape = 1
 				particles.emission_sphere_radius = 30
 				particles.local_coords = true
 				particles.one_shot = true
-				particles.amount = 15
+				particles.amount = 5
 				particles.lifetime = 0.5 * reloadTime
 				BarrelPivot.add_child(particles)
 	
@@ -142,6 +149,7 @@ func release_right_click():
 	
 func useLeft():
 	held = false
+		
 	if(bulletType != null):
 		var bullet = bulletType.instantiate()
 		bullet.dir = WeaponPivot.rotation + deg_to_rad(randf_range(-spread, spread))
@@ -196,7 +204,7 @@ func useLeft():
 	particles.spread = 5 + spread
 	particles.explosiveness = 1
 	particles.one_shot = true
-	particles.amount = 10
+	particles.amount = 2
 	particles.color = WeaponSprite.self_modulate * 2
 	particles.local_coords = true
 	particles.lifetime = 0.8

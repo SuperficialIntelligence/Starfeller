@@ -14,6 +14,7 @@ var WeaponsDictionary = {
 
 		"bulletAmount" : 1,
 
+		"bulletsPerShot" : 1,
 		"firePerSec" : 0.1,
 		"reloadTime" : 0.5,
 		
@@ -31,8 +32,9 @@ var WeaponsDictionary = {
 
 		"baseRotationSpeed" : 0.5,
 
-		"bulletAmount" : 30,
+		"bulletAmount" : 45,
 
+		"bulletsPerShot" : 1,
 		"firePerSec" : 0,
 		"reloadTime" : 3,
 		
@@ -40,20 +42,21 @@ var WeaponsDictionary = {
 	},
 	"Electroshotgun" : {
 		"weaponType" : "Electroshotgun",
-		"weaponReloadType" : "Charge",
+		"weaponReloadType" : "Store",
 
 		"bulletSpeed" : 500,
 
-		"baseRecoil" : 25,
+		"baseRecoil" : 500,
 		"recoil" : 0,
 
 		"baseRotationSpeed" : 0.5,
 
-		"bulletAmount" : 30,
+		"bulletAmount" : 15,
 
+		"bulletsPerShot" : 15,
 		"firePerSec" : 0,
-		"reloadTime" : 6,
+		"reloadTime" : 2,
 		
-		"spread" : 45
+		"spread" : 15
 	}
 }

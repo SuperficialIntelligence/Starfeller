@@ -66,7 +66,6 @@ size = Vector2(24, 4)
 
 [node name="Bullet" type="CharacterBody2D"]
 collision_layer = 2
-collision_mask = 0
 script = ExtResource("1_wg8lw")
 
 [node name="FadeAnimation" type="AnimationPlayer" parent="."]

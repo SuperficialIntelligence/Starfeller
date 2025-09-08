@@ -36,7 +36,9 @@ bg_color = Color(0.156863, 0.156863, 0.180392, 0)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5tg4y"]
 bg_color = Color(1, 1, 1, 1)
 
-[node name="Entity" type="CharacterBody2D" groups=["Player"]]
+[node name="Entity" type="CharacterBody2D" groups=["Player", "PlayerBullets"]]
+collision_layer = 3
+collision_mask = 0
 script = ExtResource("1_11tqh")
 
 [node name="TrailParticles" type="CPUParticles2D" parent="."]

@@ -183,7 +183,7 @@ theme_override_font_sizes/font_size = 40
 text = "Controls:
 WASD for movement
 Hold left click to use equipped item
-Right click to swap equipped item
+E to swap equipped item
 Shift to invert item direction
 Scroll to zoom"
 horizontal_alignment = 1
